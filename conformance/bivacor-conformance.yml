@@ -1,0 +1,145 @@
+generated: '2026-08-07'
+method: searched
+source: >-
+  BiVACOR press releases linked from https://bivacor.com/news/, the ClinicalTrials.gov
+  v2 API, and live probes of bivacor.com (2026-08-07)
+scope: >-
+  BiVACOR publishes no API, so there are no API or cross-cutting technical standards to
+  assert. What the company is actually measured against is the US medical device
+  regulatory pathway for an investigational Class III device. Those regimes are recorded
+  here with status stated honestly. The API/protocol standards block below is recorded as
+  not-applicable rather than false, so this file is never mistaken for an API posture the
+  company does not claim.
+regulatory_regime:
+- id: fda-ide-early-feasibility-study
+  name: US FDA Investigational Device Exemption (IDE) - Early Feasibility Study
+  conforms: true
+  status: granted
+  granted: '2023-11-29'
+  evidence: >-
+    FDA granted the BiVACOR Total Artificial Heart IDE approval for a first-in-human
+    Early Feasibility Study; the company announced it on 2023-11-29.
+  source: >-
+    https://bivacor.com/wp-content/uploads/2024/02/US-FDA-Grants-the-BiVACOR-Total-Artificial-Heart-IDE-Approval-for-First-in-Human-Early-Feasibility-Study.pdf
+- id: fda-breakthrough-device-designation
+  name: US FDA Breakthrough Device Designation
+  conforms: true
+  status: granted
+  granted: '2025-05-30'
+  evidence: >-
+    The BiVACOR Total Artificial Heart received FDA Breakthrough Device Designation,
+    announced by the company on 2025-05-30 and covered in the medtech trade press.
+  source: https://bivacor.com/news/
+  corroboration: >-
+    https://www.mddionline.com/cardiovascular/bivacor-total-artificial-heart-receives-fda-breakthrough-device-designation
+- id: fda-tap-program
+  name: US FDA Total Product Life Cycle Advisory Program (TAP)
+  conforms: true
+  status: accepted
+  accepted: '2025-08-06'
+  evidence: >-
+    BiVACOR announced acceptance of the TAH into the FDA's TAP program, deepening the
+    company's strategic engagement with the agency following Breakthrough Device
+    Designation.
+  source: >-
+    https://bivacor.com/wp-content/uploads/2025/08/BiVACOR-Accepted-into-FDA-TAP-program_-July-2025-F.docx
+- id: fda-premarket-authorization
+  name: US FDA premarket authorization for commercial sale
+  conforms: false
+  status: not-granted
+  evidence: >-
+    The BiVACOR Total Artificial Heart remains an investigational device under an FDA
+    Early Feasibility Study and has no PMA or other US market authorization; it is
+    limited by federal law to investigational use and is not approved for commercial sale
+    in any geography.
+  source: https://bivacor.com/
+  note: >-
+    conforms:false records that market authorization has not been granted, not that a
+    check was failed.
+- id: iso-13485
+  name: ISO 13485 - Medical devices, quality management systems
+  conforms: unknown
+  status: not-published
+  evidence: >-
+    No public ISO 13485 certification claim was found on bivacor.com or in search as of
+    2026-08-07. A clinical-stage device manufacturer running an FDA IDE study is very
+    likely operating a design-control QMS, but absence of a published claim is recorded
+    as unknown rather than asserted either way.
+  source: https://bivacor.com/
+clinical_trials:
+  source: https://clinicaltrials.gov/api/v2/studies?query.spons=BiVACOR
+  fetched: '2026-08-07'
+  studies:
+  - nct_id: NCT06174103
+    title: BiVACOR Total Artificial Heart Early Feasibility Study
+    status: RECRUITING
+    start: '2024-06-26'
+    enrollment: 5
+    note: >-
+      Registered enrollment is the original 5-patient cohort. BiVACOR announced on
+      2024-12-18 that all five initial patients were successfully bridged to a donor
+      heart transplant and that FDA had approved expansion to 15 additional patients.
+  milestones:
+  - date: '2024-07-09'
+    event: >-
+      First-in-human implantation of the BiVACOR Total Artificial Heart, performed at The
+      Texas Heart Institute / Baylor St. Luke's Medical Center, Houston.
+    source: >-
+      https://bivacor.com/the-texas-heart-institute-implants-bivacor-total-artificial-heart/
+  - date: '2024-11-22'
+    event: >-
+      First implantation in Australia, at St Vincent's Hospital Sydney; the patient was
+      supported by the device for over 100 days.
+    source: https://bivacor.com/wp-content/uploads/2025/04/BiVACOR-First-TAH-in-Australia.pdf
+api_standards:
+- id: openapi
+  conforms: false
+  applicable: false
+  evidence: >-
+    no public API contract published; /openapi.json, /openapi.yaml, /swagger.json and
+    /v1/openapi.json all return 404 on bivacor.com (see
+    well-known/bivacor-well-known.yml)
+- id: oauth2
+  conforms: false
+  applicable: false
+- id: openid-connect
+  conforms: false
+  applicable: false
+  evidence: /.well-known/openid-configuration returns 404 on bivacor.com
+- id: rfc9457-problem-details
+  conforms: false
+  applicable: false
+- id: asyncapi
+  conforms: false
+  applicable: false
+- id: graphql
+  conforms: false
+  applicable: false
+  evidence: /graphql returns 404 on bivacor.com
+- id: mcp
+  conforms: false
+  applicable: false
+- id: a2a
+  conforms: false
+  applicable: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both return 404 on
+    bivacor.com
+- id: rfc9116-security-txt
+  conforms: false
+  applicable: true
+  evidence: /.well-known/security.txt returns 404 on bivacor.com
+information_security_compliance:
+  found: false
+  note: >-
+    No trust center, SOC 2, ISO 27001, HIPAA or equivalent information-security
+    certification page was found by probe-security-programs.py (vdp=none trust=none) or
+    by search; trust.bivacor.com and security.bivacor.com do not resolve in DNS. No
+    `Compliance` and no `TrustCenter` pointer is wired in apis.yml.
+domain_security_observed:
+  source: security/bivacor-domain-security.yml
+  summary: >-
+    bivacor.com serves TLS 1.3 but publishes NO HSTS header, and the domain has SPF and
+    DMARC records while DNSSEC is not enabled and no CAA record is published. DMARC
+    policy is p=none (monitor only), so nothing is quarantined or rejected on a
+    DMARC failure.

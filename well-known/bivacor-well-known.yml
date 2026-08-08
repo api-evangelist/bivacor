@@ -1,0 +1,132 @@
+generated: '2026-08-07'
+method: probed
+source: >-
+  live probes of /.well-known/ and contract-discovery paths on every BiVACOR host
+  reachable from apis.yml, 2026-08-07
+result: >-
+  none - BiVACOR publishes no /.well-known/ document and no machine-readable API
+  contract on any host it controls. bivacor.com is a single-page WordPress marketing
+  site (generator WordPress 7.0.3) for a clinical-stage medical device company; there
+  is no API host, docs host or developer portal to probe. api.bivacor.com,
+  developer.bivacor.com, developers.bivacor.com, docs.bivacor.com, portal.bivacor.com,
+  status.bivacor.com, security.bivacor.com and trust.bivacor.com have no DNS A/AAAA
+  record at all, so those rows are recorded as unresolved rather than as an HTTP status.
+note: >-
+  Every 404 below is a real origin miss, not a soft-404 recorded as a hit: each probed
+  path returns HTTP 404 (not 200-with-an-HTML-shell), and a control path that cannot
+  exist - https://bivacor.com/definitely-not-a-real-path-xyz123/ - returns the same
+  79,365-byte 404 document, confirming the WordPress theme 404 handler answered rather
+  than a real resource. No `WellKnown` pointer is wired in apis.yml: an index that
+  documents absence is not a well-known catalog, and wiring it would credit a discovery
+  surface BiVACOR does not publish.
+wordpress_rest_api:
+  path: /wp-json/
+  status: 200
+  content_type: application/json
+  observed: >-
+    bivacor.com runs WordPress and therefore exposes the stock WordPress REST API
+    discovery document at /wp-json/, advertising the namespaces oembed/1.0,
+    elz-sitecare-connector/v1, filebird/v1, filebird/public/v1, monsterinsights/v1,
+    wp-mail-smtp/v1, awb/instagram, awb, wp/v2, wp-site-health/v1, wp-block-editor/v1
+    and wp-abilities/v1.
+  counted_as_api: false
+  reason: >-
+    This is incidental CMS infrastructure that ships enabled by default with WordPress
+    and its plugins, not a product API BiVACOR designed, documented, versioned or
+    offers to integrators. It is recorded here because it was really observed, and
+    deliberately NOT registered as an API in apis.yml or scored - doing so would credit
+    the company with a developer surface it never published.
+hosts:
+- host: https://bivacor.com
+  platform: WordPress 7.0.3
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /openapi.yaml
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /v1/openapi.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /redoc
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /wp-json/
+    status: 200
+    note: >-
+      stock WordPress REST API discovery document - see wordpress_rest_api above; not
+      counted as a published API surface
+  - path: /robots.txt
+    status: 200
+    note: >-
+      112 bytes; a single `Disallow: /wp-admin/` rule with `Allow:
+      /wp-admin/admin-ajax.php`, plus the sitemap reference. No AI-crawler blocks.
+  - path: /sitemap.xml
+    status: 200
+    note: >-
+      WordPress core sitemap index; the page sitemap lists 15 URLs - home, news,
+      publications, acknowledgements, media-coverage and career postings. No developer,
+      API, documentation or portal path anywhere in it.
+- host: api.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: developer.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: developers.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: docs.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: portal.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: status.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: security.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+- host: trust.bivacor.com
+  resolved: false
+  note: no DNS A/AAAA record
+package_registries:
+  checked: '2026-08-07'
+  note: >-
+    No first-party client library exists to record, so no packages/ artifact and no
+    `SDKs` pointer is wired.
+  results:
+  - registry: npm
+    query: bivacor
+    matches: 0
+  - registry: PyPI
+    query: bivacor
+    status: 404
+  - registry: GitHub organization
+    query: https://api.github.com/orgs/bivacor
+    status: 404
+    note: >-
+      No GitHub organization named bivacor exists; the only GitHub account matching the
+      string is an unrelated personal account (Bivacorheartlver).
