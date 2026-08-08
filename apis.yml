@@ -1,8 +1,22 @@
 aid: bivacor
 name: BiVACOR
-description: 'BiVACOR is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'BiVACOR, Inc. is a privately held, clinical-stage medical device company
+  with corporate operations in Huntington Beach, California, clinical operations in
+  Houston, Texas, and engineering operations on the Gold Coast, Queensland, Australia.
+  It develops the BiVACOR Total Artificial Heart (TAH), a titanium biventricular rotary
+  blood pump built around a single magnetically levitated rotor with a dual-sided impeller
+  that replaces both ventricles of a failing heart, with no valves, flexing diaphragms
+  or mechanical bearings, and flows above 12 L/min. Founded by Chief Technical Officer
+  Daniel Timms, PhD, and led by CEO Jim Dillon with Chief Medical Officer William E.
+  Cohn, MD, the company completed the first-in-human implantation at The Texas Heart
+  Institute in July 2024 under an FDA Early Feasibility Study, received FDA Breakthrough
+  Device Designation in May 2025, and was accepted into the FDA Total Product Life Cycle
+  Advisory Program in August 2025. The TAH is an investigational device, limited by
+  federal law to investigational use, and is not approved for commercial sale. BiVACOR
+  is a medical hardware and clinical-research business - it publishes no developer
+  program, public API, SDK, or machine-readable API contract.'
 url: https://raw.githubusercontent.com/api-evangelist/bivacor/refs/heads/main/apis.yml
+image: https://bivacor.com/wp-content/uploads/2024/02/BIVACOR_Logo-300x64.jpg
 x-type: company
 x-source: harvest:secondary-market
 x-tier: stub
@@ -12,6 +26,14 @@ created: '2026-08-07'
 modified: '2026-08-07'
 tags:
 - Company
+- Medical Devices
+- Health Care
+- Cardiology
+- Heart Failure
+- Total Artificial Heart
+- Mechanical Circulatory Support
+- Medical Technology
+- Clinical Trials
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -19,5 +41,60 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/bivacor-domain-security.yml
+- type: Conformance
+  url: conformance/bivacor-conformance.yml
+- type: LLMsTxt
+  url: llms/bivacor-llms.txt
 - type: Website
+  url: https://bivacor.com/
+- type: Blog
+  url: https://bivacor.com/news/
+- type: BlogRSS
+  url: https://bivacor.com/feed/
+- type: Press
+  url: https://bivacor.com/media-coverage/
+- type: Publications
+  url: https://bivacor.com/publications/
+- type: Careers
+  url: https://jobs.ashbyhq.com/bivacor-inc
+- type: Contact
+  url: https://bivacor.com/#contact
+- type: Support
+  url: mailto:admin@bivacor.com
+- type: LinkedIn
+  url: https://www.linkedin.com/company/bivacor-pty-ltd
+- type: Twitter
+  url: https://x.com/bivacor
+- type: SecondaryMarket
   url: https://www.nasdaqprivatemarket.com/
+
+x-enrichment:
+  date: '2026-08-07'
+  status: minimal
+  artifacts_added: 4
+  pass: local-v1
+
+x-coverage:
+  state: none
+  reason: not-a-software-company
+  detail: >-
+    BiVACOR is a clinical-stage medical device manufacturer whose product is an
+    implantable titanium total artificial heart, not software; bivacor.com is a
+    single-page WordPress marketing site whose 15-URL sitemap contains no developer, API
+    or documentation path, and api./developer./docs./portal./status.bivacor.com have no
+    DNS record at all - the only 200 on any contract-discovery path is /wp-json/, the
+    stock WordPress REST API that ships enabled by default and is not a product API.
+  evidence:
+  - url: https://bivacor.com/openapi.json
+    status: 404
+  - url: https://bivacor.com/.well-known/agent-card.json
+    status: 404
+  - url: https://bivacor.com/.well-known/security.txt
+    status: 404
+  - url: https://bivacor.com/llms.txt
+    status: 404
+  - url: https://bivacor.com/sitemap.xml
+    status: 200
+  checked: '2026-08-07'
